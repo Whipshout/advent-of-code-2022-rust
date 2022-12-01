@@ -4,7 +4,7 @@ use std::cmp::PartialOrd;
 fn main(input: &str) -> (u32, u32) {
     let mut calories: Vec<u32> = input
         .split("\n\n")
-        .map(|c| c.lines().filter_map(|l| l.parse::<u32>().ok()).sum())
+        .map(|l| l.lines().map(|c| c.parse::<u32>().unwrap()).sum::<u32>())
         .collect();
 
     quick_sort::<Vec<u32>>(&mut calories);
