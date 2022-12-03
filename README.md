@@ -38,5 +38,6 @@ The following table contains wall-clock timings of all 25 solutions, as well as 
 
 | Day | Part 1 |   Part 2    | Time (ms) |
 |:----|:------:|:-----------:|----------:|
-| 01  |   0    |      0      |       0ms |
+| 01  | 70720  |   207148    |       0ms |
+| 02  |  9759  |    12429    |       0ms |
 |     |        | Total time: |       0ms |
