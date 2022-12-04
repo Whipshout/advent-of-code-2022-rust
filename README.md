@@ -41,5 +41,5 @@ The following table contains wall-clock timings of all 25 solutions, as well as 
 | 01  | 70720  |   207148    |       0ms |
 | 02  |  9759  |    12429    |       0ms |
 | 03  |  7980  |    2881     |       0ms |
-| 03  |  569   |     936     |       0ms |
+| 04  |  569   |     936     |       0ms |
 |     |        | Total time: |       0ms |
