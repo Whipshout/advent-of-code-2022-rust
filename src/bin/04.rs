@@ -20,9 +20,9 @@ fn main(input: &str) -> (usize, usize) {
 fn part1(coords: &[Coords]) -> usize {
     coords
         .iter()
-        .filter(|&coord| {
-            coord.0.contains(coord.1.start()) && coord.0.contains(coord.1.end())
-                || coord.1.contains(coord.0.start()) && coord.1.contains(coord.0.end())
+        .filter(|&c| {
+            c.0.contains(c.1.start()) && c.0.contains(c.1.end())
+                || c.1.contains(c.0.start()) && c.1.contains(c.0.end())
         })
         .count()
 }
@@ -30,7 +30,7 @@ fn part1(coords: &[Coords]) -> usize {
 fn part2(coords: &[Coords]) -> usize {
     coords
         .iter()
-        .filter(|&coord| max(coord.0.start(), coord.1.start()) <= min(coord.0.end(), coord.1.end()))
+        .filter(|&c| max(c.0.start(), c.1.start()) <= min(c.0.end(), c.1.end()))
         .count()
 }
 
