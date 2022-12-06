@@ -1,31 +1,30 @@
-use std::process::Command;
+use itertools::Itertools;
+use std::{error::Error, fs, process::Command};
 
-use once_cell::sync::Lazy;
-use regex::Regex;
-use walkdir::WalkDir;
-
-static MS_REGEX: Lazy<Regex> = Lazy::new(|| Regex::new(r"Time: (\d+)ms").unwrap());
-
-fn extract_time(s: &str) -> u32 {
-    let capture = MS_REGEX.captures_iter(s).next().unwrap();
-    capture[1].parse().unwrap()
+fn extract_microseconds(output: &str) -> Result<usize, Box<dyn Error>> {
+    let out = output.lines().last().unwrap();
+    let time = if out.ends_with("ms") {
+        out["Time: ".len()..out.len() - 2].parse::<usize>()? * 1000
+    } else {
+        out["Time: ".len()..out.len() - 3].parse::<usize>()?
+    };
+    Ok(time)
 }
 
-fn main() {
-    let number_of_problems = WalkDir::new("./src/bin/").into_iter().count() - 1;
-
-    let total_time = (1..=number_of_problems)
-        .map(|day_num| {
-            let day = format!("{:0>2}", day_num);
-            let cmd = Command::new("cargo")
-                .args(["run", "--release", "--bin", &day])
-                .output()
-                .unwrap();
-            let output = String::from_utf8(cmd.stdout).unwrap();
-            println!("Day {}:\n{}", day, output);
-            extract_time(&output)
-        })
-        .sum::<u32>();
-
-    println!("Total time: {}ms", total_time);
+fn main() -> Result<(), Box<dyn Error>> {
+    let days = fs::read_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/src/bin/"))?
+        .filter_map(|p| p.ok()?.path().file_stem()?.to_str().map(str::to_string))
+        .sorted()
+        .collect::<Vec<_>>();
+    let mut total_time = 0;
+    for day in &days {
+        let cmd = Command::new("cargo")
+            .args(["run", "--release", "--bin", day])
+            .output()?;
+        let output = String::from_utf8(cmd.stdout)?;
+        println!("Day {}:\n{}", day, output);
+        total_time += extract_microseconds(&output)?;
+    }
+    println!("Total time: {}ms", total_time / 1000);
+    Ok(())
 }
