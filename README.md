@@ -44,5 +44,6 @@ The following table contains wall-clock timings of all 25 solutions, as well as 
 | 04  |    569    |     936     |  62μs |
 | 05  | LJSVLTWQM |  BRQWDBBJM  | 138μs |
 | 06  |   1531    |    2518     |  51μs |
+| 07  |  1391690  |   5469168   | 266μs |
 |     |           |             |       |
 |     |           | Total time: |   0ms |
