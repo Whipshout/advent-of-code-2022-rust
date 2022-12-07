@@ -31,7 +31,7 @@ cargo run --release             # run all days
 
 ## Leaderboard placings
 
-![leaderboard](./images/leaderboard.png)
+![leaderboard](./images/board.png)
 
 ## Benchmark
 The following table contains wall-clock timings of all 25 solutions, as well as the produced answer to both parts. The time includes computing both parts of the problem, using the timing method in [lib.rs](src/lib.rs). It was done on an `AMD Ryzen 7 5800X @ 3.8GHz`.
