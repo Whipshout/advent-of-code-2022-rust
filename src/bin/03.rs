@@ -29,7 +29,7 @@ fn part2(rucksacks: &[&[u8]]) -> usize {
 }
 
 // In the first problem, it's going to find only 1 common character
-// But in the second it could find some come characters in one of the iterations
+// But in the second it could find multiple common characters in one of the iterations
 // That's why this returns a Vector instead of a u8 directly
 fn get_common_char(bytes: (&[u8], &[u8])) -> Vec<u8> {
     bytes
