@@ -1,23 +1,18 @@
-use std::array;
-
 use itertools::Itertools;
 
-type Stacks = [Vec<char>; 9];
+type Stacks = Vec<Vec<char>>;
 type Cmd = (usize, usize, usize);
 
 #[aoc::main(05)]
 fn main(input: &str) -> (String, String) {
     let (stacks, cmds) = input.split_once("\n\n").unwrap();
 
-    let mut stacks: Stacks = array::from_fn(|i| {
-        stacks
-            .lines()
-            .map(|l| l.chars().skip(1).step_by(4).collect::<Vec<char>>())
-            .rev()
-            .map(|row| row[i])
-            .take_while(|&c| !c.is_whitespace())
-            .collect()
-    });
+    let raw_stacks: Stacks = stacks
+        .lines()
+        .map(|l| l.chars().skip(1).step_by(4).collect::<Vec<char>>())
+        .collect();
+
+    let mut stacks: Stacks = transpose(raw_stacks); // column <==> row
 
     let cmds: Vec<Cmd> = cmds
         .lines()
@@ -44,6 +39,23 @@ fn part2(stacks: &mut Stacks, cmds: &[Cmd]) -> String {
     move_stacks(stacks, cmds, false);
 
     stacks.iter().map(|x| x.last().unwrap()).join("")
+}
+
+fn transpose(stacks: Stacks) -> Vec<Vec<char>> {
+    let len = stacks[0].len();
+
+    let mut iters: Vec<_> = stacks.into_iter().map(|n| n.into_iter()).collect();
+
+    (0..len)
+        .map(|_| {
+            iters
+                .iter_mut()
+                .map(|n| n.next().unwrap())
+                .rev()
+                .filter(|c| !c.is_whitespace())
+                .collect::<Vec<char>>()
+        })
+        .collect()
 }
 
 fn move_stacks(stacks: &mut Stacks, cmds: &[Cmd], reverse: bool) {
