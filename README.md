@@ -47,5 +47,6 @@ The following table contains wall-clock timings of all 25 solutions, as well as 
 | 07  |  1391690  |   5469168   | 266μs |
 | 08  |   1647    |   392080    | 448μs |
 | 09  |   6190    |    2516     | 604μs |
+| 10  |   13180   |  EZFCHJAB   |   8μs |
 |     |           |             |       |
 |     |           | Total time: |   1ms |

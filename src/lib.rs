@@ -19,8 +19,8 @@ pub fn main(args: TokenStream, input: TokenStream) -> TokenStream {
         let now = ::std::time::Instant::now();
         let (p1, p2) = aoc_solution(INPUT.trim_end());
         let elapsed = now.elapsed();
-        println!("Part one: {}", p1);
-        println!("Part two: {}", p2);
+        println!("Part one: \n{}", p1);
+        println!("Part two: \n{}", p2);
         if elapsed.as_millis() > 0 {
           println!("Time: {}ms", elapsed.as_millis());
         } else {
