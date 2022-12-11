@@ -7,7 +7,7 @@ fn main(input: &str) -> (u32, u32) {
         .map(|l| l.lines().map(|c| c.parse::<u32>().unwrap()).sum::<u32>())
         .collect();
 
-    quick_sort::<Vec<u32>>(&mut calories);
+    quick_sort::<u32>(&mut calories);
 
     (part1(&calories), part2(&calories))
 }
@@ -20,7 +20,7 @@ fn part2(calories: &[u32]) -> u32 {
     calories.iter().rev().take(3).sum()
 }
 
-pub fn partition<T: PartialOrd>(arr: &mut [T], lo: isize, hi: isize) -> isize {
+fn partition<T: PartialOrd>(arr: &mut [T], lo: isize, hi: isize) -> isize {
     let pivot = hi as usize;
     let mut i = lo - 1;
     let mut j = hi;
@@ -52,7 +52,7 @@ fn _quick_sort<T: Ord>(arr: &mut [T], lo: isize, hi: isize) {
     }
 }
 
-pub fn quick_sort<T: Ord>(arr: &mut Vec<u32>) {
+pub fn quick_sort<T: Ord>(arr: &mut Vec<T>) {
     let len = arr.len();
     if len > 1 {
         _quick_sort(arr, 0, (len - 1) as isize);
